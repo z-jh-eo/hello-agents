@@ -1,24 +1,23 @@
 from abc import ABC, abstractmethod
 from typing import Any, override
 
-from code.chapter6.CAMEL.DigitalBookWriting import LLM_BASE_URL
-from .message import Message
-from .config import Config
-from .llm import MyLLM
+from message import Message
+from config import Config
+from llm import MyLLM
 
 
 class Agent(ABC):
     def __init__(
         self,
         name: str,
-        llm: MyLLM,
         system_prompt: str|None = None,
         config: Config|None = None,
     ):
         self.name = name
-        self.llm = llm
         self.system_prompt = system_prompt
         self.config = config or Config()
+
+        self.llm = MyLLM()
         self._history: list[Message] = []
 
     @abstractmethod

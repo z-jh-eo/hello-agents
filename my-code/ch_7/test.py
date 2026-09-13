@@ -1,5 +1,6 @@
 from message import Message
 from llm import MyLLM
+from simple_chat_agent import ChatAgent
 
 
 def test_llm():
@@ -21,5 +22,11 @@ def test_llm():
     print(response.content)
 
 
+def test_simple_agent():
+    agent = ChatAgent(name="simple_test")
+    agent.run()
+    
+
+
 if __name__ == "__main__":
-    test_llm()
+    test_simple_agent()
