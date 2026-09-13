@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 
 MessageRoles = Literal["user", "assistant", "system", "tool"]
-# ensure a legal role for OpenAI api
+# ensure a legal role for OpenAI sdk
 
 class Message(BaseModel):
     content: str
