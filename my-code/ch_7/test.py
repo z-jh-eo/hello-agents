@@ -24,8 +24,8 @@ def test_llm():
 
 def test_simple_agent():
     agent = ChatAgent(name="simple_test")
-    agent.run()
-    
+    agent.chat()
+
 
 
 if __name__ == "__main__":

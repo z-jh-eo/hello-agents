@@ -7,8 +7,8 @@ You are a helpful assistant.
 
 class ChatAgent(Agent):
     def __init__(
-        self, 
-        name, 
+        self,
+        name,
         system_prompt = SYSTEM_PROMPT,
         config = None,
         max_turn = 1_000,
@@ -17,7 +17,7 @@ class ChatAgent(Agent):
         self._history: list[Message] = []
         self.max_turn = max_turn
 
-    def single_turn(self, input_text: str, **kwargs) -> str:
+    def run(self, input_text: str, **kwargs) -> str:
         messages = []
         messages.append({"role": "system", "content": self.system_prompt})
         for m in self._history:
@@ -40,19 +40,17 @@ class ChatAgent(Agent):
             content=response.content
         )
 
-        print(llm_res.content)
-
         self.add_message(user_msg)
         self.add_message(llm_res)
 
-    def run(self):
-        for i in range(self.max_turn):
-            input_text = input(">")
-            if input_text == 'q':
+        return llm_res.content
+
+    def chat(self):
+        for _ in range(self.max_turn):
+            input_text = input("> ").strip()
+            if input_text in ["q", "quit", "exit"]:
                 print("Bye")
                 break
 
-            self.single_turn(input_text)
-    
-    
-        
+            resp = self.run(input_text)
+            print(resp)
